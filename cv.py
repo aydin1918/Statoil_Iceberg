@@ -1,18 +1,14 @@
-import numpy as np  # linear algebra
+import numpy as np 
 import random 
 np.random.seed(2017)
-import pandas as pd  # data processing, CSV file I/O (e.g. pd.read_csv)
+import pandas as pd  
 from sklearn.model_selection import train_test_split
 from subprocess import check_output
 
-# print(check_output(["ls", "/home/aka_baku/Kaggle/Statoil/data/processed/"]).decode("utf8"))
 
-train5 = pd.read_json("/home/gasimov_aydin/Statoil/data/processed/train.json")
+train = pd.read_json("/home/gasimov_aydin/Statoil/data/processed/train.json")
 test = pd.read_json("/home/gasimov_aydin/Statoil/data/processed/test.json")
-real_images = pd.read_csv('/home/gasimov_aydin/Statoil/data/processed/real_images.csv')
 
-train_join = pd.merge(real_images,test,how='inner',on='id')
-train = train_join.append(train5,ignore_index=True)
 
 train.inc_angle = train.inc_angle.replace('na', 0)
 train.inc_angle = train.inc_angle.astype(float).fillna(0.0)
